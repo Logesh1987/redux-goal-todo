@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore } from 'redux'
+import {Provider} from 'react-redux';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import ConnectedApp from './components/App';
+import combineReducers from './reducers/index';
+import applyMiddleware from './middleware/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const store = createStore(combineReducers, applyMiddleware)
+
+ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedApp />
+    </Provider>
+    , document.getElementById('app'))
